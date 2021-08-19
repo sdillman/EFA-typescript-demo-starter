@@ -109,3 +109,51 @@ let tonyTheTiger: Tiger = new Tiger();
 tonyTheTiger.furMarkings = 'striped';
 tonyTheTiger.isObligateCarnivore = true;
 
+// 2.12 - PARAMETER PROPERTIES
+// Parameter properties allow us to make our classes even more streamlined by allowing us to declare property types and accessors in our constructor parameters.
+
+class Store {
+    constructor(name: string, city: string) {
+        this.name = name;
+        this.city = city;
+    }
+    name: string;
+    city: string;
+}
+let ikea: Store = new Store('Ikea', 'Fishers');
+// The pattern above has become quite common over the years, and we can now use TypeScript to streamline a lot of the code above in our constructor.
+// Refactored and now called ElegantStore:
+class ElegantStore {
+    constructor(public name: string, public city: string) {
+        // nothing needs to be in here!
+    }
+}
+let louisVuitton: ElegantStore = new ElegantStore('Louis Vuitton', 'Geist');
+// Again, the code above is a shortified version of the first version of the Store class. Let's look at a few things:
+
+// We add a public accessor. We'll talk about this in the next module. For now, know that it's required for this approach.
+
+// With this approach, we don't have to do all of the bindings for our properties inside of our constructor. We don't need this.name = name !
+
+// TypeScript infers that there is a property called a name that will be the value of the argument that is passed into the constructor.
+
+
+// 2.13 - ACCESSORS
+
+class Employee extends Person {
+    private _salary: number;  // It is common practice to see private properties in classes start with an underscore. This is not required. It is just a common convention.
+    getSalary(): string {
+        return this._salary.toString();
+    }
+    setSalary(newSalary: number) {
+        this._salary = newSalary;
+    }
+}
+let newEmployee: Employee = new Employee();
+newEmployee.setSalary(30000);
+// newEmployee._salary = 0; this breaks because -salary is private
+let salaryResult: string = newEmployee.getSalary();
+console.log("The salary is: ", salaryResult);
+
+
+

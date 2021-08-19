@@ -113,4 +113,48 @@ smokeyTheBear.hibernationStartMonth = 11;
 var tonyTheTiger = new Tiger();
 tonyTheTiger.furMarkings = 'striped';
 tonyTheTiger.isObligateCarnivore = true;
+// 2.12 - PARAMETER PROPERTIES
+// Parameter properties allow us to make our classes even more streamlined by allowing us to declare property types and accessors in our constructor parameters.
+var Store = /** @class */ (function () {
+    function Store(name, city) {
+        this.name = name;
+        this.city = city;
+    }
+    return Store;
+}());
+var ikea = new Store('Ikea', 'Fishers');
+// The pattern above has become quite common over the years, and we can now use TypeScript to streamline a lot of the code above in our constructor.
+// Refactored and now called ElegantStore:
+var ElegantStore = /** @class */ (function () {
+    function ElegantStore(name, city) {
+        this.name = name;
+        this.city = city;
+        // nothing needs to be in here!
+    }
+    return ElegantStore;
+}());
+var louisVuitton = new ElegantStore('Louis Vuitton', 'Geist');
+// Again, the code above is a shortified version of the first version of the Store class. Let's look at a few things:
+// We add a public accessor. We'll talk about this in the next module. For now, know that it's required for this approach.
+// With this approach, we don't have to do all of the bindings for our properties inside of our constructor. We don't need this.name = name !
+// TypeScript infers that there is a property called a name that will be the value of the argument that is passed into the constructor.
+// 2.13 - ACCESSORS
+var Employee = /** @class */ (function (_super) {
+    __extends(Employee, _super);
+    function Employee() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Employee.prototype.getSalary = function () {
+        return this._salary.toString();
+    };
+    Employee.prototype.setSalary = function (newSalary) {
+        this._salary = newSalary;
+    };
+    return Employee;
+}(Person));
+var newEmployee = new Employee();
+newEmployee.setSalary(30000);
+// newEmployee._salary = 0; this breaks because -salary is private
+var salaryResult = newEmployee.getSalary();
+console.log("The salary is: ", salaryResult);
 //# sourceMappingURL=03-classes.js.map
