@@ -23,3 +23,22 @@ let lassie: Animal2 = {
 // }
 // 2. The code within the curly braces is the method implementation. This is what is going to happen inside the function when it is called, and it includes the result.
 
+// With a class, we could provide a full implementation of the method. In an interface, we simply create the method signature. Then, the object will provide its own implementation of the method, its own logic.
+
+interface Product {
+    name: string;
+    price: number;
+    setTimeOfPurchase(d: Date);
+}
+
+class Apples implements Product {
+    name: 'Apples';
+    price: 5.50;
+    setTimeOfPurchase(d: Date) {
+        console.log("Apples purchased on ", d);
+    }
+}
+
+let myApples: Apples = new Apples();
+myApples.setTimeOfPurchase(new Date(Date.now()));
+
